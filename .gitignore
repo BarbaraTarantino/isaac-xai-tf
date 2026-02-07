@@ -1,0 +1,74 @@
+# ===============================
+# Python
+# ===============================
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+
+# ===============================
+# Environments
+# ===============================
+.env
+.venv
+venv/
+env/
+conda-env/
+*.egg-info/
+
+# ===============================
+# Jupyter
+# ===============================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ===============================
+# Data (raw & processed)
+# ===============================
+data/raw/
+data/processed/
+data/splits/*/train.csv
+data/splits/*/train_subsampled.csv
+data/splits/*/val.csv
+data/splits/*/test.csv
+
+# Allow README / metadata if present
+!data/**/README.md
+!data/**/subsample_info.txt
+
+# ===============================
+# Results (large artifacts)
+# ===============================
+results/**/training/
+results/**/raw_deltas/
+results/**/checkpoints/
+results/**/models/
+results/**/logs/
+
+# Keep final tables / figures
+!results/**/audit*/isaac_results*.csv
+!results/**/audit*/auroc*.csv
+!results/**/audit*/summary*.csv
+!results/**/audit*/figures/
+
+# ===============================
+# Figures
+# ===============================
+figures/*.pdf
+figures/*.eps
+figures/*.png
+
+# ===============================
+# OS / Editor
+# ===============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ===============================
+# Temporary
+# ===============================
+*.tmp
+*.log
+*.bak

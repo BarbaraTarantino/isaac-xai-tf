@@ -1,0 +1,5 @@
+source=train.csv
+output=train_subsampled.csv
+TRAIN_N=100000
+SEED=0
+label_proportions={0: 0.5003805576697649, 1: 0.49961944233023514}

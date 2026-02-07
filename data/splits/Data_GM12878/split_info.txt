@@ -1,0 +1,7 @@
+seed=0
+test_size=0.2
+val_size=0.1
+n_total=499998
+n_train=359998
+n_val=40000
+n_test=100000
