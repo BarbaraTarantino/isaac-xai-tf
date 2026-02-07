@@ -2,7 +2,7 @@
 
 
 
-\*\*Code repository for:\*\* ISAAC: Intervention-Based Structural Auditing of Deep Models for Transcription Factor Binding
+\*\*Code repository for:\*\* \*ISAAC: Intervention-Based Structural Auditing of Deep Models for Transcription Factor Binding\*
 
 
 
@@ -32,11 +32,11 @@ Run the notebooks in numerical order:
 
 
 
-1\. \*\*`0-isaac-load.ipynb`\*\* – Data preparation and structural prior construction
+1\. \*\*0-isaac-load.ipynb\*\* – Data preparation and structural prior construction
 
-2\. \*\*`1-isaac-train.ipynb`\*\* – Training procedure (as documented in the paper)
+2\. \*\*1-isaac-train.ipynb\*\* – Training procedure (as documented in the paper)
 
-3\. \*\*`2-isaac-audit.ipynb`\*\* – ISAAC audit and result generation
+3\. \*\*2-isaac-audit.ipynb\*\* – ISAAC audit and result generation
 
 
 
@@ -65,4 +65,6 @@ All experiments are fully reproducible:
 \- \*\*Datasets:\*\* ENCODE TF ChIP-seq (A549, GM12878, HepG2 cell lines)
 
 \- \*\*Metrics:\*\* AUROC for predictive performance; Entanglement, Collapse, Instability for structural auditing
+
+
 
