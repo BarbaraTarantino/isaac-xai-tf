@@ -1,13 +1,13 @@
 # ISAAC: Intervention-Based Structural Auditing
 
-**Code repository for:** ISAAC: Intervention-Based Structural Auditing of Deep Models for Transcription Factor Binding
+**Code repository for:** "ISAAC: Intervention-Based Structural Auditing of Deep Models for Transcription Factor Binding"
 
 This repository contains the code and notebooks implementing the ISAAC framework for structurally auditing deep learning models in regulatory genomics. The experiments use transcription factor (TF) binding prediction as a biological case study.
 
 ## Data Availability
 
 Raw transcription factor binding datasets used in this study are publicly
-available on the Open Science Framework (OSF) due to their size:
+available on the Open Science Framework (OSF):
 
 https://osf.io/k73td/
 
@@ -20,9 +20,9 @@ subsampled training sets used in the paper are fully reproducible by the code pr
    `data/raw/`
 
 2. Run the notebooks in numerical order:
-   - **0-isaac-load.ipynb** – Data preparation and structural prior construction  
-   - **1-isaac-train.ipynb** – Training procedure  
-   - **2-isaac-audit.ipynb** – ISAAC audit and result generation
+   - `0-isaac-load.ipynb` – Data preparation and structural prior construction  
+   - `1-isaac-train.ipynb` – Training procedure  
+   - `2-isaac-audit.ipynb` – ISAAC audit and result generation
 
 ## Contents
 
