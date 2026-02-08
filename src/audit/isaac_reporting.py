@@ -239,20 +239,20 @@ def save_all_formats(fig, basepath):
 
 
 # ==================================================
-# PLOT — ISAAC BOOTSTRAP 
+# PLOT — ISAAC  
 # ==================================================
 
 def plot_isaac(
-    df_bootstrap: pd.DataFrame,
+    df_resampling: pd.DataFrame,
     dataset: str | None = None,
     savepath: str | Path | None = None,
 ):
     """
-    Horizontal ISAAC bootstrap plot (publication figure).
+    Horizontal ISAAC resampling plot (publication figure).
     """
     set_isaac_plot_style()
 
-    df = df_bootstrap if dataset is None else df_bootstrap[df_bootstrap.dataset == dataset]
+    df = df_resampling if dataset is None else df_resampling[df_resampling.dataset == dataset]
 
     INTERVENTION_MAP = {
         "M1": ("PW", "#4C72B0"),
@@ -370,14 +370,14 @@ def extract_isaac_results(
     return rows
 
 
-def extract_bootstrap_distributions(
+def extract_resampling_distributions(
     results: Dict,
     dataset: str,
     model: str,
     seed: int,
 ) -> List[Dict]:
     """
-    Extract bootstrap distributions for plotting.
+    Extract resampling distributions for plotting.
     """
     rows = []
 

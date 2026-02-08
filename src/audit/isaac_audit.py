@@ -4,8 +4,8 @@ ISAAC-SAFE auditing module.
 Implements robust, label-balanced ISAAC audits with:
 - deterministic mechanistic vs spurious interventions
 - site-consistent ΔS measurement
-- balanced bootstrap subsampling
-- reproducible confidence intervals
+- repeated balanced subsampling of held-out data
+- empirical stability estimates via resampling
 
 This module contains NO model training logic.
 """
@@ -210,7 +210,7 @@ def run_isaac_audit_correct(
             dS_spur[k].extend(spur_logits - base_logits)
 
     # --------------------------------------------------
-    # Metric computation + bootstrap
+    # Metric computation 
     # --------------------------------------------------
     out = {}
 
@@ -274,7 +274,7 @@ def run_isaac_audit_correct(
 
 
 # ==================================================
-# Robust balanced bootstrap audit
+# Robust balanced subsampling audit
 # ==================================================
 
 def isaac_audit(
@@ -293,7 +293,7 @@ def isaac_audit(
     verbose: bool = False,
 ) -> Dict:
     """
-    Robust ISAAC audit with label-balanced subsampling bootstrap.
+    Robust ISAAC audit with repeated label-balanced subsampling.
     """
     rng = np.random.RandomState(seed)
 
@@ -322,7 +322,7 @@ def isaac_audit(
 
     it_range = range(n_iterations)
     if verbose:
-        it_range = tqdm(it_range, desc="Balanced bootstrap", leave=False)
+        it_range = tqdm(it_range, desc="Balanced subsampling", leave=False)
 
     for i in it_range:
         subsample, _ = balanced_subsample(
