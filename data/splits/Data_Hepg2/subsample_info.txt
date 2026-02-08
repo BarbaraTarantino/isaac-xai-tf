@@ -1,5 +1,0 @@
-source=train.csv
-output=train_subsampled.csv
-TRAIN_N=100000
-SEED=0
-label_proportions={0: 0.5029416666666666, 1: 0.4970583333333333}
