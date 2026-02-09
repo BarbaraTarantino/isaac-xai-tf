@@ -139,21 +139,18 @@ def find_best_pwm_site(seq: str, pwm: np.ndarray) -> int:
 # Core ISAAC audit (site-consistent ΔS)
 # ==================================================
 
-def run_isaac_audit_correct(
+def run_isaac_single_audit(
     sequences: List[str],
     model_logits_batch,
     mech_interventions,
     spur_interventions,
     pwm: np.ndarray,
     batch_size: int,
-    bootstrap_B: int = 200,
     seed: int = 0,
-    return_bootstrap: bool = False,
     verbose: bool = False,
 ) -> Dict:
     """
     Run ISAAC audit measuring ΔS at the SAME targeted PWM site.
-    Canonical, correctness-preserving implementation.
     """
     rng = np.random.RandomState(seed)
     random.seed(seed)
@@ -247,26 +244,6 @@ def run_isaac_audit_correct(
             "n_samples": len(dS_m),
         }
 
-        if bootstrap_B > 1:
-            boot = {m: [] for m in metrics}
-            n = len(dS_m)
-
-            for _ in range(bootstrap_B):
-                idx = rng.choice(n, n, replace=True)
-                bm = isaac_metrics(dS_m[idx], dS_s[idx])
-                for m in metrics:
-                    boot[m].append(bm[m])
-
-            for m, v in boot.items():
-                res[f"{m}_low"]  = float(np.percentile(v, 2.5))
-                res[f"{m}_high"] = float(np.percentile(v, 97.5))
-                if return_bootstrap:
-                    res[f"{m}_bootstrap"] = np.asarray(v)
-        else:
-            for m in metrics:
-                res[f"{m}_low"]  = metrics[m]
-                res[f"{m}_high"] = metrics[m]
-
         out[(k, "mech")] = res.copy()
         out[(k, "spur")] = res.copy()
 
@@ -284,7 +261,6 @@ def isaac_audit(
     mech_interventions,
     spur_interventions,
     pwm: np.ndarray,
-    total_samples: int = 20_000,
     subsample_size: int = 5_000,
     n_iterations: int = 30,
     batch_size: int = 128,
@@ -299,18 +275,12 @@ def isaac_audit(
 
     if verbose:
         print(
-            f"[ROBUST ISAAC] {total_samples} → "
+            f"[ROBUST ISAAC]  → "
             f"{subsample_size} × {n_iterations} (balanced)"
         )
 
-    if len(sequences) < total_samples:
-        warnings.warn("Dataset smaller than requested audit size")
-        audit_seqs, audit_labels = sequences, labels
-    else:
-        audit_seqs, audit_labels, _ = select_balanced_audit_set(
-            sequences, labels, total_samples, seed
-        )
-
+    audit_seqs, audit_labels = sequences, labels
+    
     results = {
         "entanglement": [],
         "collapse": [],
@@ -329,14 +299,13 @@ def isaac_audit(
             audit_seqs, audit_labels, subsample_size, rng
         )
 
-        res = run_isaac_audit_correct(
+        res = run_isaac_single_audit(
             subsample,
             model_logits_batch,
             mech_interventions,
             spur_interventions,
             pwm,
             batch_size,
-            bootstrap_B=1,
             seed=seed + i,
             verbose=verbose,
         )
@@ -366,7 +335,6 @@ def isaac_audit(
         "collapse":     summarize(results["collapse"]),
         "instability":  summarize(results["instability"]),
         "config": {
-            "total_samples": len(audit_seqs),
             "subsample_size": subsample_size,
             "n_iterations": n_iterations,
             "batch_size": batch_size,
