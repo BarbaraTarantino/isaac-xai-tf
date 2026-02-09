@@ -30,6 +30,9 @@ BASES = ["A", "C", "G", "T"]
 class RegulatoryStructuralPrior:
     """
     Canonical regulatory structure induced by PWM affinity.
+
+    Note: a relaxed affinity threshold (80th percentile) is used
+    to ensure sufficient structural site coverage per sequence.
     """
     pwm: np.ndarray
     ic_core: List[int]
