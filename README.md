@@ -28,7 +28,7 @@ subsampled training sets used in the paper are fully reproducible by the code pr
 
 - **Data preparation and PWM construction** - Loading ENCODE datasets and constructing position weight matrix (PWM) priors
 - **Model training procedure** - Reproducible training scripts for DeepBind, DeepSEA, and BPNet
-- **ISAAC auditing framework** - Robust intervention-based auditing with balanced bootstrap
+- **ISAAC auditing framework** - Robust intervention-based auditing with balanced subsampling
 - **Result generation** - Scripts to produce paper-ready tables and figures
 
 ## Reproducibility
